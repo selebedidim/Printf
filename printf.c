@@ -12,7 +12,7 @@ int _printf(const char *format, ...) {
             format++; // Move past the '%'
             switch (*format) {
                 case 'c':
-                    putchar(va_arg(args, int));
+                    write(va_arg(args, int));
                     count++;
                     break;
                 case 's':
@@ -20,7 +20,7 @@ int _printf(const char *format, ...) {
                     count += strlen(va_arg(args, char*));
                     break;
                 case '%':
-                    putchar('%');
+                    write('%');
                     count++;
                     break;
                 default:
@@ -28,7 +28,7 @@ int _printf(const char *format, ...) {
                     break;
             }
         } else {
-            putchar(*format);
+            write(*format);
             count++;
         }
         format++; // Move to the next character in the format string
