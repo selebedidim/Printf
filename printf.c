@@ -1,45 +1,39 @@
-/*
- * Printf -Function print via pring
- * Strlen - No of letters
- *
- */
-
+#include "printf.h"
 #include <stdio.h>
-#include <stdarg.h>
-#include "main.h"
 
-int _printf(const char *format, ...) 
-{
+int _printf(const char *format, ...) {
     va_list args;
     va_start(args, format);
 
-    int char_count = 0;
-    while (*format != '\0') {
+    int count = 0; // To keep track of the number of characters printed
+
+    while (*format) {
         if (*format == '%') {
             format++; // Move past the '%'
-            if (*format == '\0') break; // Handle format string ending with '%'
-            if (*format == 'c') {
-                int c = va_arg(args, int);
-                putchar(c);
-                char_count++;
-            } else if (*format == 's') {
-                char *s = va_arg(args, char *);
-                while (*s != '\0') {
-                    putchar(*s);
-                    s++;
-                    char_count++;
-                }
-            } else if (*format == '%') {
-                putchar('%');
-                char_count++;
+            switch (*format) {
+                case 'c':
+                    putchar(va_arg(args, int));
+                    count++;
+                    break;
+                case 's':
+                    fputs(va_arg(args, char*), stdout);
+                    count += strlen(va_arg(args, char*));
+                    break;
+                case '%':
+                    putchar('%');
+                    count++;
+                    break;
+                default:
+                    // Unsupported specifier, ignore it
+                    break;
             }
         } else {
             putchar(*format);
-            char_count++;
+            count++;
         }
-        format++;
+        format++; // Move to the next character in the format string
     }
 
     va_end(args);
-    return char_count;
+    return count;
 }
