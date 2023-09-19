@@ -1,7 +1,14 @@
-#include "main.h"
+#include <stdio.h>
+#include "my_printf.h"
 
 int main() {
-    int count = _printf("Hello, %s! This is a %c example.%%\n", "world", 'C');
-    printf("\nTotal characters printed: %d\n", count);
+    int count;
+
+    count = _printf("The answer is %d.\n", 42);
+    printf("Characters printed: %d\n", count);
+
+    count = _printf("Value of pi is approximately %d.\n", 3);
+    printf("Characters printed: %d\n", count);
+
     return 0;
 }

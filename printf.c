@@ -1,39 +1,33 @@
-#include "printf.h"
+#include "my_printf.h"
 #include <stdio.h>
+#include <unistd.h>  // For the write function
 
 int _printf(const char *format, ...) {
     va_list args;
     va_start(args, format);
 
-    int count = 0; // To keep track of the number of characters printed
+    int count = 0;  // Count of characters printed
 
     while (*format) {
-        if (*format == '%') {
-            format++; // Move past the '%'
-            switch (*format) {
-                case 'c':
-                    write(va_arg(args, int));
-                    count++;
-                    break;
-                case 's':
-                    fputs(va_arg(args, char*), stdout);
-                    count += strlen(va_arg(args, char*));
-                    break;
-                case '%':
-                    write('%');
-                    count++;
-                    break;
-                default:
-                    // Unsupported specifier, ignore it
-                    break;
-            }
-        } else {
-            write(*format);
+        if (*format != '%') {
+            // Use the write function to print characters
+            write(1, format, 1);  // 1 is the file descriptor for stdout
             count++;
+        } else {
+            format++;  // Move past '%'
+            if (*format == 'd' || *format == 'i') {
+                // Handle %d and %i - integer
+                int num = va_arg(args, int);  // Get the integer from args
+                char buffer[20];  // Assuming a maximum of 20 characters for the integer
+                int len = snprintf(buffer, sizeof(buffer), "%d", num);
+                write(1, buffer, len);
+                count += len;
+            }
         }
-        format++; // Move to the next character in the format string
+        format++;
     }
 
     va_end(args);
+
     return count;
 }
