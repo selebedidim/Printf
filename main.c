@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "my_printf.h"
+#include "main.h"
 
 int main() {
     int count;
