@@ -1,4 +1,12 @@
 #include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
+int get_flags(const char *format, int *i);
+int get_width(const char *format, int *i, va_list list);
+int get_precision(const char *format, int *i, va_list list);
+int get_size(const char *format, int *i);
+int get_handle(const char *format, int *i, va_list list, char *buffer, int *buff_ind);
+
 
 void print_buffer(char buffer[], int *buff_ind);
 
@@ -38,8 +46,7 @@ int _printf(const char *format, ...)
 			precision = get_precision(format, &i, list);
 			size = get_size(format, &i);
 			++i;
-			printed = handle_print(format, &i, list, buffer,
-				flags, width, precision, size);
+			printed = handle_print(format, &i, list, buffer);
 			if (printed == -1)
 				return (-1);
 			printed_chars += printed;
