@@ -16,8 +16,8 @@ int print_hexadecimal(va_list lists, char buffer[], int flags, int width, int pr
 int print_octal(va_list lists, char buffer[], int flags, int width, int precision, int size);
 int print_unsigned(va_list lists, char buffer[], int flags, int width, int precision, int size);
 
+#include <stdarg.h>
+
 int _printf(const char *format, ...);
 
-
-
-#endif
+#endif  /* MAIN_H */

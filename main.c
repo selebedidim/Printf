@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <limits.h>
 #include <stdio.h>
 #include "main.h"
@@ -41,4 +42,19 @@ int main(void)
 		_printf("Unknown:[%r]\n");
 		printf("Unknown:[%r]\n");
 		return (0);
+=======
+#include <stdio.h>
+#include "main.h"
+
+int main() {
+    int count;
+
+    count = _printf("The answer is %d.\n", 42);
+    printf("Characters printed: %d\n", count);
+
+    count = _printf("Value of pi is approximately %d.\n", 3);
+    printf("Characters printed: %d\n", count);
+
+    return 0;
+>>>>>>> 825253ca5a04e853863e91bcd016d60fedf424d7
 }
