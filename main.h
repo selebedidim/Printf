@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <stddef.h>
 int get_flags(const char *format, int *i);
 int get_width(const char *format, int *i, va_list list);
 int get_precision(const char *format, int *i, va_list list);
@@ -16,6 +17,11 @@ int print_hexadecimal(va_list lists, char buffer[], int flags, int width, int pr
 int print_octal(va_list lists, char buffer[], int flags, int width, int precision, int size);
 int print_unsigned(va_list lists, char buffer[], int flags, int width, int precision, int size);
 
+/* functions2.c */
+int print_rot13string(va_list types, char buffer[], int flags, int width, int precision, int size);
+int print_reverse(va_list types, char buffer[], int flags, int width, int precision, int size);
+int print_non_printable(va_list types, char buffer[], int flags, int width, int precision, int size);
+int print_pointer(va_list types, char buffer[], int flags, int width, int precision, int size);
 #include <stdarg.h>
 
 int _printf(const char *format, ...);
